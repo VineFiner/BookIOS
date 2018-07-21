@@ -21,7 +21,7 @@
 		84F28E9120BFCA6A00239D93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F28E9020BFCA6A00239D93 /* Assets.xcassets */; };
 		84F28E9420BFCA6A00239D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F28E9220BFCA6A00239D93 /* LaunchScreen.storyboard */; };
 		84FD730E20D9F00700E8CB5B /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD730D20D9F00700E8CB5B /* UserDefaults+Ext.swift */; };
-		84FD731320DA227100E8CB5B /* ResponseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD731220DA227100E8CB5B /* ResponseContainer.swift */; };
+		84FD731320DA227100E8CB5B /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD731220DA227100E8CB5B /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,7 @@
 		84F28E9320BFCA6A00239D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84F28E9520BFCA6A00239D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84FD730D20D9F00700E8CB5B /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
-		84FD731220DA227100E8CB5B /* ResponseContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseContainer.swift; sourceTree = "<group>"; };
+		84FD731220DA227100E8CB5B /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		E666E587D7D45947500D040D /* Pods-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chat/Pods-Chat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				841BACBA20D4F7C200E6F1D0 /* Token.swift */,
-				84FD731220DA227100E8CB5B /* ResponseContainer.swift */,
+				84FD731220DA227100E8CB5B /* Response.swift */,
 				84DB4DF720DA52F800597F2A /* User.swift */,
 			);
 			path = Models;
@@ -284,7 +284,7 @@
 				841BACB320D4ED1400E6F1D0 /* Network.swift in Sources */,
 				84DB4DF420DA4BA400597F2A /* HomePageViewController.swift in Sources */,
 				84DB4DF820DA52F800597F2A /* User.swift in Sources */,
-				84FD731320DA227100E8CB5B /* ResponseContainer.swift in Sources */,
+				84FD731320DA227100E8CB5B /* Response.swift in Sources */,
 				84DB4DEF20DA36DE00597F2A /* Plugins.swift in Sources */,
 				841BACBD20D4FED700E6F1D0 /* ChatApi.swift in Sources */,
 			);

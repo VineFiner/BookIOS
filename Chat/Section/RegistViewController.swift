@@ -120,14 +120,9 @@ extension RegistViewController {
         guard let name = nameTextField.text else { return }
         guard let passwd = passwdTextField.text else { return }
         guard let email = emailTextField.text else { return }
-        networkProvider.regist(email: email,
-                               password: passwd,
-                               name: name,
-                               disposed: rx.disposeBag,
-                               success: { (result) in
-                                guard let result = result else {return}
-                                Share.shared.token = result.data
 
+        networkProvider.request(ChatApi.registe(name: name, email: email, password: passwd), disposed: rx.disposeBag, success: { (response: Response<Token>) in
+            Share.shared.token = response.data
         }) { (error) in
 
         }

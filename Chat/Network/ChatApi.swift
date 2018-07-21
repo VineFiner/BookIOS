@@ -9,15 +9,27 @@
 import Foundation
 import Moya
 
+protocol ChatAPIType {
+    var addAuth: Bool {get}
+}
+
 enum ChatApi {
     case login(email: String, password: String)
     case registe(name: String, email: String, password: String)
     case userInfo
+
+    case tokenRefresh(refreshToken: String)
 }
 
-extension ChatApi: TargetType{
+extension ChatApi: TargetType, ChatAPIType {
+
+    var addAuth: Bool {
+        // TODO
+        return true
+    }
+
     var baseURL: URL {
-        guard let url = URL(string: "http://192.168.199.189:8080") else {
+        guard let url = URL(string: "http://192.168.100.9:8080") else {
             fatalError("baseURL could not be configured")
         }
         return url
@@ -31,13 +43,16 @@ extension ChatApi: TargetType{
             return "api/users/register"
         case .userInfo:
             return "api/account/info"
+        case .tokenRefresh:
+            return "api/token/refresh"
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .login,
-             .registe:
+             .registe,
+             .tokenRefresh:
             return .post
         case .userInfo:
             return .get
@@ -56,6 +71,8 @@ extension ChatApi: TargetType{
             return .requestJSONEncodable(["name":name, "password": password, "email": email])
         case .userInfo:
             return .requestPlain
+        case let .tokenRefresh(refreshToken):
+            return .requestJSONEncodable(["refresh_token": refreshToken])
         }
     }
     
@@ -77,3 +94,4 @@ extension ChatApi: AccessTokenAuthorizable {
         return .bearer
     }
 }
+

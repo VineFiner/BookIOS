@@ -130,19 +130,14 @@ extension LoginViewController {
         guard let email = self.emailTextField.text else {return}
         guard let passwd = self.passwdTextField.text else {return}
 
-        networkProvider.login(email: email,
-                              password: passwd,
-                              disposed: rx.disposeBag,
-                              success: { (result) in
-                                guard let result = result else {return}
-                                if result.isOk {
-                                    Share.shared.token = result.data
+        networkProvider.request(ChatApi.login(email: email, password: passwd),
+                                disposed: rx.disposeBag,
+                                success: { (response: Response<Token>) in
+                                    Share.shared.token = response.data
                                     AppDelegate.jumpToHomePageComtroller()
+                                }) { (error) in
+
                                 }
-                              },
-                              failure: { (error) in
-                                log.info(error)
-                              })
     }
 }
 

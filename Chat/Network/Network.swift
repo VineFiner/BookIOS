@@ -10,10 +10,9 @@ import Foundation
 import Moya
 import RxSwift
 
-
 // 192.168.199.189
 protocol Network {
-    associatedtype T: TargetType
+    associatedtype T: TargetType, ChatAPIType
     var provider: MoyaProvider<T> { get }
 }
 
@@ -22,66 +21,60 @@ final class NetworkManager: Network {
     let provider = MoyaProvider<ChatApi>(plugins: [NetworkLoggerPlugin(verbose: true),
                                                    ChachePolicyPlugin(),
                                                    AccessTokenPlugin(tokenClosure: Share.shared.token?.accessToken ?? "")])
-    func regist(email: String,
-                password: String,
-                name: String,
-                disposed: DisposeBag,
-                success: @escaping((ResponseContainer<TokenResult>?) -> Void),
-                failure: @escaping((Error) -> Void)) {
-        provider
-            .rx
-            .request(.registe(name: name, email: email, password: password))
-            .filterSuccessfulStatusCodes()
-            .subscribe(self.handleAfterRequestSuccess(success: success, failure: failure))
-            .disposed(by: disposed)
-    }
-
-    func login(email: String,
-               password: String,
-               disposed: DisposeBag,
-               success: @escaping((ResponseContainer<TokenResult>?) -> Void),
-               failure: @escaping((Error) -> Void)) {
-
-        provider
-            .rx
-            .request(.login(email: email, password: password))
-            .filterSuccessfulStatusCodes()
-            .subscribe(self.handleAfterRequestSuccess(success: success, failure: failure))
-            .disposed(by: disposed)
-    }
 }
 
 // Account
 extension NetworkManager {
-    func info(disposed: DisposeBag, success: @escaping((ResponseContainer<User>?) -> Void),
-              failure: @escaping((Error) -> Void)) {
-        provider
+
+    private func actureRequest<R: Codable>(_ token: ChatApi,
+                                           disposed: DisposeBag,
+                                           success: @escaping ((Response<R>) -> Void),
+                                        failure: @escaping((Error) -> Void)) {
+        self.provider
             .rx
-            .request(.userInfo)
+            .request(token)
             .filterSuccessfulStatusCodes()
-            .subscribe(self.handleAfterRequestSuccess(success: success, failure: failure))
+            .map(Response<R>.self)
+            .subscribe(onSuccess: { (response) in
+                success(response)
+            }, onError: { error in
+                failure(error)
+            })
             .disposed(by: disposed)
     }
-}
 
-extension Network {
-     func handleAfterRequestSuccess<R: Codable>(success: @escaping ((ResponseContainer<R>?) -> Void),
-                                                failure: @escaping(((Error) -> Void))) -> (SingleEvent<Response>) -> Void {
-        return { (result: SingleEvent<Response>) in
-            switch result {
-            case let .success(response):
-                do {
-                    let results: ResponseContainer<R> = try response.data.makeToContainer()
-                    success(results)
-                } catch let error {
-                    failure(error)
-                }
-            case let .error(error):
-                failure(error)
-            }
+    func request<R: Codable>(_ token: ChatApi,
+                             disposed: DisposeBag,
+                             success: @escaping ((Response<R>) -> Void),
+                             failure: @escaping((Error) -> Void)) {
+        if token.addAuth {
+            guard let appToken = Share.shared.token else { return }
+            if appToken.isValid { return }
+            self.actureRequest(ChatApi.tokenRefresh(refreshToken: appToken.refreshToken),
+                                      disposed: disposed,
+                                      success: { (response: Response<Token>) in
+                                            self.actureRequest(token, disposed: disposed, success:success, failure: failure)
+                                      },
+                                      failure: failure)
+        } else {
+            self.actureRequest(token, disposed: disposed, success:success, failure: failure)
         }
     }
 }
+
+
+extension NetworkManager {
+
+
+    func appTokenRequest(_ share: Share = Share.shared) {
+
+
+
+
+    }
+}
+
+
 
 
 

@@ -28,15 +28,13 @@ class HomePageViewController: UIViewController {
     }
 
     func loadData() {
-        networkProvider.info(disposed: rx.disposeBag,
-                             success: { [weak self](res) in
-                                guard let _ = self, let result = res else { return }
-                                if result.isOk {
-                                    Share.shared.user = result.data
-                                }
-                            }) { [weak self](error) in
+        networkProvider.request(ChatApi.userInfo,
+                                disposed: rx.disposeBag,
+                                success: { (response: Response<User>) in
 
-                            }
+                                }) { (error) in
+
+                                }
     }
 
 }

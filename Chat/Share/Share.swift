@@ -12,21 +12,17 @@ private let userDefault = UserDefaults.standard
 
 /// 需要定义规范使用这个单例
 final class Share {
-
     static let shared:Share = Share()
 
+    init() {}
 
-    init() {
-
-    }
-
-    var token: TokenResult? {
+    var token: Token? {
         set {
             userDefault.set(object: newValue, forKey: "tokenKey")
             userDefault.synchronize()
         }
         get {
-            let reulst = userDefault.get(objectType: TokenResult.self, forKey: "tokenKey")
+            let reulst = userDefault.get(objectType: Token.self, forKey: "tokenKey")
             return reulst
         }
     }
@@ -42,6 +38,8 @@ final class Share {
         }
     }
 
+    
+
     var isLogin: Bool {
         guard let _ = user?.id, let token = token?.accessToken else {
             return false
@@ -50,6 +48,4 @@ final class Share {
     }
 }
 
-extension Share {
-    
-}
+extension Share { }
