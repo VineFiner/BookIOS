@@ -75,15 +75,14 @@ extension AppDelegate {
         }
         return delegate
     }
-
+    
     static var share: AppDelegate { return shareDelegate()}
 
     static func jumpToHomePageComtroller() {
         let delegate = self.share
-        let hpVc = HomePageViewController(networkProvider: delegate.provider)
-        let nav = UINavigationController(rootViewController: hpVc)
-        delegate.window?.rootViewController = nav
-        delegate.window?.makeKeyAndVisible()
+        guard let navigator = delegate.navigator, let window = delegate.window else {return}
+        window.rootViewController = delegate.createRootViewController(navigator: navigator)
+        window.makeKeyAndVisible()
     }
 }
 

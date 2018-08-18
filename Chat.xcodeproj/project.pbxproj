@@ -23,6 +23,7 @@
 		84620A212126CB900095CA62 /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84620A202126CB900095CA62 /* NavigationMap.swift */; };
 		84620A23212889F10095CA62 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84620A22212889F10095CA62 /* ViewModelType.swift */; };
 		84620A2521288CB50095CA62 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84620A2421288CB50095CA62 /* RegisterViewModel.swift */; };
+		84620A2921288EC50095CA62 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84620A2821288EC50095CA62 /* HomePageViewModel.swift */; };
 		84DB4DEF20DA36DE00597F2A /* Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB4DEE20DA36DE00597F2A /* Plugins.swift */; };
 		84DB4DF820DA52F800597F2A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB4DF720DA52F800597F2A /* User.swift */; };
 		84F28E8A20BFCA6800239D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F28E8920BFCA6800239D93 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		84620A202126CB900095CA62 /* NavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMap.swift; sourceTree = "<group>"; };
 		84620A22212889F10095CA62 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		84620A2421288CB50095CA62 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		84620A2821288EC50095CA62 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		84DB4DEE20DA36DE00597F2A /* Plugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plugins.swift; sourceTree = "<group>"; };
 		84DB4DF720DA52F800597F2A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		84F28E8620BFCA6800239D93 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +133,8 @@
 		84620A092126BC840095CA62 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				84620A0A2126BC840095CA62 /* HomePageViewController.swift */,
+				84620A2721288EB00095CA62 /* ViewModel */,
+				84620A2621288EA30095CA62 /* Controller */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -178,6 +181,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		84620A2621288EA30095CA62 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84620A2821288EC50095CA62 /* HomePageViewModel.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		84620A2721288EB00095CA62 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				84620A0A2126BC840095CA62 /* HomePageViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		84620A2A2128901D0095CA62 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				84F28E9020BFCA6A00239D93 /* Assets.xcassets */,
+				84F28E9220BFCA6A00239D93 /* LaunchScreen.storyboard */,
+				84F28E9520BFCA6A00239D93 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		84F28E7D20BFCA6800239D93 = {
 			isa = PBXGroup;
 			children = (
@@ -199,15 +228,13 @@
 		84F28E8820BFCA6800239D93 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				84620A2A2128901D0095CA62 /* Resource */,
 				84620A152126BCB60095CA62 /* Route */,
 				84FD730B20D9EFE200E8CB5B /* Lib */,
 				841BACB620D4F36700E6F1D0 /* Share */,
 				841BACB120D4ECE700E6F1D0 /* Network */,
 				84FD730A20D9E64F00E8CB5B /* Section */,
 				84F28E8920BFCA6800239D93 /* AppDelegate.swift */,
-				84F28E9020BFCA6A00239D93 /* Assets.xcassets */,
-				84F28E9220BFCA6A00239D93 /* LaunchScreen.storyboard */,
-				84F28E9520BFCA6A00239D93 /* Info.plist */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -371,6 +398,7 @@
 			files = (
 				84620A112126BC850095CA62 /* NewsMainViewController.swift in Sources */,
 				84620A142126BC850095CA62 /* MineMainViewController.swift in Sources */,
+				84620A2921288EC50095CA62 /* HomePageViewModel.swift in Sources */,
 				841BACB820D4F37100E6F1D0 /* Share.swift in Sources */,
 				846209F12126B3AA0095CA62 /* TabBarController.swift in Sources */,
 				84620A0F2126BC850095CA62 /* RegistViewController.swift in Sources */,
@@ -528,7 +556,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5U78RNYQ5J;
-				INFOPLIST_FILE = Chat/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Chat/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,7 +578,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5U78RNYQ5J;
-				INFOPLIST_FILE = Chat/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Chat/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
