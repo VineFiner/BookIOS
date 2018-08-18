@@ -38,10 +38,10 @@ final class RegistViewController: UIViewController {
         return button
     }()
 
-    var networkProvider: NetworkManager
+    var viewModel: RegisterViewModel
 
-    init(networkProvider: NetworkManager) {
-        self.networkProvider = networkProvider
+    init(viewModel: RegisterViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -121,7 +121,7 @@ extension RegistViewController {
         guard let passwd = passwdTextField.text else { return }
         guard let email = emailTextField.text else { return }
 
-        networkProvider.request(ChatApi.registe(name: name, email: email, password: passwd), disposed: rx.disposeBag, success: { (response: Response<Token>) in
+        viewModel.networkProvider.request(ChatApi.registe(name: name, email: email, password: passwd), disposed: rx.disposeBag, success: { (response: Response<Token>) in
             Share.shared.token = response.data
         }) { (error) in
 

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     lazy var emailTextField: UITextField = {
         let textField = UITextField()
@@ -40,10 +40,10 @@ class LoginViewController: UIViewController {
         return button
     }()
 
-    var networkProvider: NetworkManager
+    var viewModel: LoginViewModel
 
-    init(networkProvider: NetworkManager) {
-        self.networkProvider = networkProvider
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -121,7 +121,8 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     /// 注册
     private func registe() {
-        let registeVc = RegistViewController(networkProvider: networkProvider)
+        let registerViewModel = RegisterViewModel(provider: viewModel.networkProvider, navigator: viewModel.navigator)
+        let registeVc = RegistViewController(viewModel: registerViewModel)
         self.navigationController?.pushViewController(registeVc, animated: true)
     }
 
@@ -130,7 +131,7 @@ extension LoginViewController {
         guard let email = self.emailTextField.text else {return}
         guard let passwd = self.passwdTextField.text else {return}
 
-        networkProvider.request(ChatApi.login(email: email, password: passwd),
+        self.viewModel.networkProvider.request(ChatApi.login(email: email, password: passwd),
                                 disposed: rx.disposeBag,
                                 success: { (response: Response<Token>) in
                                     Share.shared.token = response.data

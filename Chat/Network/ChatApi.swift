@@ -17,19 +17,21 @@ enum ChatApi {
     case login(email: String, password: String)
     case registe(name: String, email: String, password: String)
     case userInfo
-
     case tokenRefresh(refreshToken: String)
 }
 
 extension ChatApi: TargetType, ChatAPIType {
 
     var addAuth: Bool {
-        // TODO
-        return true
+        switch self {
+        case .login, .registe:
+            return false
+        default: return true
+        }
     }
 
     var baseURL: URL {
-        guard let url = URL(string: "http://192.168.100.9:8080") else {
+        guard let url = URL(string: "http://127.0.0.1:8988") else {
             fatalError("baseURL could not be configured")
         }
         return url

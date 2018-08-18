@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController {
+final class HomePageViewController: UIViewController {
     var networkProvider: NetworkManager
     
     init(networkProvider: NetworkManager) {

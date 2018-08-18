@@ -8,21 +8,29 @@
 
 import UIKit
 import SwiftyBeaver
+import URLNavigator
+
 let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let provider = NetworkManager()
+    let provider = NetworkManager() // 服务给 viewmodel
+    private var navigator: NavigatorType?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = UIColor.white
-        setupConfig()
-        self.window = window
 
-        window.rootViewController = createRootViewController()
+        let navigator = Navigator()
+        NavigationMap.initialize(navigator: navigator)
+
+        setupConfig()
+
+        self.navigator = navigator
+        self.window = window
+        window.rootViewController = createRootViewController(navigator: navigator)
         window.makeKeyAndVisible()
         return true
     }
@@ -49,13 +57,13 @@ extension AppDelegate {
 }
 
 extension AppDelegate {
-    private func createRootViewController() -> UIViewController {
+    private func createRootViewController(navigator: NavigatorType) -> UIViewController {
         if Share.shared.isLogin {
-            let hpVc = HomePageViewController(networkProvider: provider)
-            let nav = UINavigationController(rootViewController: hpVc)
-            return nav
+            let tabbar = TabBarController(networkProvider: provider, navigator: navigator)
+            return tabbar
         } else {
-            let loginVc = LoginViewController(networkProvider: provider)
+            let viewmodel = LoginViewModel(provider: provider, navigator: navigator)
+            let loginVc = LoginViewController(viewModel: viewmodel)
             let nav = UINavigationController(rootViewController: loginVc)
             return nav
         }
