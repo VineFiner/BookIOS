@@ -2,6 +2,8 @@
 platform :ios, '10.0'
 
 target 'Chat' do
+  use_frameworks!
+  inhibit_all_warnings!
   pod 'Alamofire', '~> 4.7.2'
   pod 'Moya', '~> 11.0.2'
   pod 'Moya/RxSwift', '~> 11.0.2'
@@ -16,7 +18,10 @@ target 'Chat' do
   pod 'Kingfisher', '~> 4.8.0'
   pod 'DynamicColor', '~> 4.0.2'
   pod 'SwiftyBeaver', '~> 1.5.2'
+
   pod 'FDFullscreenPopGesture', '~> 1.1' # oc
+  pod 'CYLTabBarController', '~> 1.17.16' #oc
+  pod 'BHBPopView', '~> 1.2.0' #oc
 
 
   pod 'URLNavigator', '~> 2.0.6'

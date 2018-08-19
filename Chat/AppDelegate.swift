@@ -40,6 +40,22 @@ extension AppDelegate {
     private func setupConfig() {
         configNavgationBar()
         setupLogConfig()
+        setupTabConfig()
+    }
+
+    private func setupTabConfig() {
+        let tabBarItem = UITabBarItem.appearance()
+        tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.gray], for: .normal)
+        tabBarItem.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.black], for: .selected)
+
+        let tabBarApperance = UITabBar.appearance()
+        tabBarApperance.backgroundImage =  #imageLiteral(resourceName: "com_tab_bg")
+        tabBarApperance.shadowImage = UIImage()
+    }
+
+    private func configNavgationBar() {
+        let appearance = UINavigationBar.appearance()
+        appearance.isTranslucent = false
     }
 
     private func setupLogConfig() {
@@ -49,22 +65,17 @@ extension AppDelegate {
         log.addDestination(console)
         log.addDestination(file)
     }
-
-    private func configNavgationBar() {
-        let appearance = UINavigationBar.appearance()
-        appearance.isTranslucent = false
-    }
 }
 
 extension AppDelegate {
     private func createRootViewController(navigator: NavigatorType) -> UIViewController {
         if Share.shared.isLogin {
-            let tabbar = TabBarController(networkProvider: provider, navigator: navigator)
+            let tabbar = TabBarController.create(networkProvider: provider, navigator: navigator)
             return tabbar
         } else {
             let viewmodel = LoginViewModel(provider: provider, navigator: navigator)
             let loginVc = LoginViewController(viewModel: viewmodel)
-            let nav = UINavigationController(rootViewController: loginVc)
+            let nav = NavigationController(rootViewController: loginVc)
             return nav
         }
     }
