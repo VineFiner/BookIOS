@@ -131,14 +131,27 @@ extension LoginViewController {
         guard let email = self.emailTextField.text else {return}
         guard let passwd = self.passwdTextField.text else {return}
 
-        self.viewModel.networkProvider.request(ChatApi.login(email: email, password: passwd),
+        self.viewModel
+            .networkProvider.request(ChatApi.login(email: email, password: passwd),
                                 disposed: rx.disposeBag,
-                                success: { (response: Response<Token>) in
+                                success: { [weak self](response: Response<Token>) in
+                                    guard let weakSelf = self, response.isOk else {return}
                                     Share.shared.token = response.data
-                                    AppDelegate.jumpToHomePageComtroller()
+                                    weakSelf.getUserInfo()
                                 }) { (error) in
 
                                 }
+    }
+
+    private func getUserInfo() {
+        self.viewModel.networkProvider.request(ChatApi.userInfo, disposed: rx.disposeBag, success: { [weak self](response: Response<User>) in
+            guard let _ = self, response.isOk else {return}
+            Share.shared.user = response.data
+            AppDelegate.jumpToHomePageComtroller()
+        }) { (error) in
+
+        }
+
     }
 }
 

@@ -93,7 +93,11 @@ extension ChatApi: CahchePoliyGettable {
 // MARK: - Auth
 extension ChatApi: AccessTokenAuthorizable {
     var authorizationType: AuthorizationType {
-        return .bearer
+        if self.addAuth {
+            return .bearer
+        } else {
+            return .none
+        }
     }
 }
 

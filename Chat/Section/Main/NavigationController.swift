@@ -12,24 +12,34 @@ class NavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if self.childViewControllers.count > 0 { // 如果push进来的不是第一个控制器
+            let button = UIButton(type: .custom)
+            button.setTitle("", for: .normal)
+            let backImage = #imageLiteral(resourceName: "nav_back_white")
+            button.setImage(backImage, for: .normal)
+            button.setImage(backImage, for: .highlighted)
+            button.frame = CGRect(x: 0, y: 0, width: 70, height: 30)
+            button.contentHorizontalAlignment = .left
+            button.addTarget(self, action: #selector(actionForBack(sender:)), for: .touchUpInside)
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
+            viewController.hidesBottomBarWhenPushed = true
+        }
+        super.pushViewController(viewController, animated: animated)
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @objc func actionForBack(sender: UIButton) {
+        popViewController(animated: true)
     }
-    */
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        // 对特殊的 vc 进行相关的定制化
+        if let topVc = self.topViewController {
+            return topVc.preferredStatusBarStyle
+        }
+        return super.preferredStatusBarStyle
+    }
 
 }

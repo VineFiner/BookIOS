@@ -38,8 +38,6 @@ final class Share {
         }
     }
 
-    
-
     var isLogin: Bool {
         guard let _ = user?.id, let token = token?.accessToken else {
             return false

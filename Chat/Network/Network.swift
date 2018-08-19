@@ -49,13 +49,16 @@ extension NetworkManager {
                              failure: @escaping((Error) -> Void)) {
         if token.addAuth {
             guard let appToken = Share.shared.token else { return }
-            if appToken.isValid { return }
-            self.actureRequest(ChatApi.tokenRefresh(refreshToken: appToken.refreshToken),
+            if appToken.isValid {
+                self.actureRequest(token, disposed: disposed, success: success, failure: failure)
+            } else {
+                self.actureRequest(ChatApi.tokenRefresh(refreshToken: appToken.refreshToken),
                                       disposed: disposed,
                                       success: { (response: Response<Token>) in
                                             self.actureRequest(token, disposed: disposed, success:success, failure: failure)
                                       },
                                       failure: failure)
+            }
         } else {
             self.actureRequest(token, disposed: disposed, success:success, failure: failure)
         }
@@ -65,11 +68,7 @@ extension NetworkManager {
 
 extension NetworkManager {
 
-
     func appTokenRequest(_ share: Share = Share.shared) {
-
-
-
 
     }
 }
