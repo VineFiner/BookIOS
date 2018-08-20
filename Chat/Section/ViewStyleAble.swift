@@ -32,6 +32,7 @@ extension ViewStyleAble {
     var gNavbarHeight: CGFloat {return 44}
     var gScreenWidth: CGFloat { return UIScreen.main.bounds.width}
     var gScreenHeight: CGFloat {return UIScreen.main.bounds.height}
+    var gButtonTitleFont: UIFont { return UIFont.systemFont(ofSize: 15) }
 }
 
 extension CGFloat {

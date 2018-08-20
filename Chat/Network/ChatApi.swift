@@ -31,7 +31,7 @@ extension ChatApi: TargetType, ChatAPIType {
     }
 
     var baseURL: URL {
-        guard let url = URL(string: "http://127.0.0.1:8988") else {
+        guard let url = URL(string: "http://192.168.100.9:8988") else {
             fatalError("baseURL could not be configured")
         }
         return url

@@ -18,6 +18,10 @@ target 'Chat' do
   pod 'Kingfisher', '~> 4.8.0'
   pod 'DynamicColor', '~> 4.0.2'
   pod 'SwiftyBeaver', '~> 1.5.2'
+  pod 'TextFieldEffects', '~> 1.4.0'
+  pod 'PKHUD', '~> 5.1.0'
+  pod 'CryptoSwift', '~> 0.11.0'
+  pod 'ActiveLabel', '~> 0.9.0'
 
   pod 'FDFullscreenPopGesture', '~> 1.1' # oc
   pod 'CYLTabBarController', '~> 1.17.16' #oc

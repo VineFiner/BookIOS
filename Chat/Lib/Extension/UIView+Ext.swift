@@ -14,7 +14,8 @@ extension NamespaceWrapper where Wrapper: UIView {
     // MARK: - Basic Properties
     /// X Axis value of UIView.
     var x: CGFloat {
-        set { self.wrappedValue.frame = CGRect(x: _pixelIntegral(newValue),
+        set {
+            self.wrappedValue.frame = CGRect(x: _pixelIntegral(newValue),
                                   y: self.y,
                                   width: self.width,
                                   height: self.height)
@@ -24,7 +25,8 @@ extension NamespaceWrapper where Wrapper: UIView {
 
     /// Y Axis value of UIView.
     var y: CGFloat {
-        set { self.wrappedValue.frame = CGRect(x: self.x,
+        set {
+            self.wrappedValue.frame = CGRect(x: self.x,
                                   y: _pixelIntegral(newValue),
                                   width: self.width,
                                   height: self.height)
@@ -34,7 +36,8 @@ extension NamespaceWrapper where Wrapper: UIView {
 
     /// Width of view.
     var width: CGFloat {
-        set { self.wrappedValue.frame = CGRect(x: self.x,
+        set {
+            self.wrappedValue.frame = CGRect(x: self.x,
                                   y: self.y,
                                   width: _pixelIntegral(newValue),
                                   height: self.height)
@@ -44,7 +47,8 @@ extension NamespaceWrapper where Wrapper: UIView {
 
     /// Height of view.
     var height: CGFloat {
-        set { self.wrappedValue.frame = CGRect(x: self.x,
+        set {
+            self.wrappedValue.frame = CGRect(x: self.x,
                                   y: self.y,
                                   width: self.width,
                                   height: _pixelIntegral(newValue))
@@ -55,7 +59,8 @@ extension NamespaceWrapper where Wrapper: UIView {
     // MARK: - Origin and Size
     /// View's Origin point.
     var origin: CGPoint {
-        set { self.wrappedValue.frame = CGRect(x: _pixelIntegral(newValue.x),
+        set {
+            self.wrappedValue.frame = CGRect(x: _pixelIntegral(newValue.x),
                                   y: _pixelIntegral(newValue.y),
                                   width: self.width,
                                   height: self.height)
@@ -65,12 +70,15 @@ extension NamespaceWrapper where Wrapper: UIView {
 
     /// View's size.
     var size: CGSize {
-        set { self.wrappedValue.frame = CGRect(x: self.x,
-                                  y: self.y,
-                                  width: _pixelIntegral(newValue.width),
-                                  height: _pixelIntegral(newValue.height))
+        set {
+            self.wrappedValue.frame = CGRect(x: self.x,
+                                             y: self.y,
+                                             width: _pixelIntegral(newValue.width),
+                                             height: _pixelIntegral(newValue.height))
         }
-        get { return self.wrappedValue.frame.size }
+        get {
+            return self.wrappedValue.frame.size
+        }
     }
 
     // MARK: - Extra Properties
@@ -186,6 +194,21 @@ extension NamespaceWrapper where Wrapper: UIView {
     fileprivate func _pixelIntegral(_ pointValue: CGFloat) -> CGFloat {
         let scale = UIScreen.main.scale
         return (round(pointValue * scale) / scale)
+    }
+
+
+
+
+    // MARK: - TOOL
+    func getImage(size: CGSize? = nil) -> UIImage? {
+        let size = size ?? self.size
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+
+        guard let context = UIGraphicsGetCurrentContext() else {return nil}
+        self.wrappedValue.layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 
 }

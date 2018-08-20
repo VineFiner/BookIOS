@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 extension String: NamespaceWrapable {}
 
@@ -27,4 +28,17 @@ extension NamespaceWrapper where Wrapper == String {
         let strSize = labelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dict, context: nil).size
         return strSize.height
     }
+
+    var isEmail: Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with:self.wrappedValue)
+    }
+
+    var pwdStr: String {
+//        return self.wrappedValue.md5().uppercased()
+        return self.wrappedValue
+    }
+
+
 }

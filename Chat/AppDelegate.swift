@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import URLNavigator
+import IQKeyboardManagerSwift
 
 let log = SwiftyBeaver.self
 
@@ -25,14 +26,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigator = Navigator()
         NavigationMap.initialize(navigator: navigator)
-
+        IQKeyboardManager.shared.enable = true
         setupConfig()
 
         self.navigator = navigator
         self.window = window
         window.rootViewController = createRootViewController(navigator: navigator)
         window.makeKeyAndVisible()
+        launchAnimation()
         return true
+    }
+}
+
+extension AppDelegate {
+    fileprivate func launchAnimation() {
+        let lauchVc = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateViewController(withIdentifier: "LaunchScreen")
+        lauchVc.view.layoutIfNeeded()
+        guard let image = lauchVc.view.ext.getImage(),
+            let mainWindow = window else {
+                return
+        }
+        let lauchView = UIImageView(frame: mainWindow.bounds)
+        lauchView.image = image
+        mainWindow.addSubview(lauchView)
+        UIView.animate(withDuration: 1, delay: 0.25, options: .beginFromCurrentState, animations: {
+            lauchView.transform = CGAffineTransform(scaleX: 2, y: 2)
+            lauchView.alpha = 0
+        }) { (finished) in
+            lauchView.removeFromSuperview()
+        }
     }
 }
 
@@ -56,6 +78,7 @@ extension AppDelegate {
     private func configNavgationBar() {
         let appearance = UINavigationBar.appearance()
         appearance.isTranslucent = false
+        appearance.shadowImage = UIImage()
     }
 
     private func setupLogConfig() {
@@ -67,16 +90,26 @@ extension AppDelegate {
     }
 }
 
+extension AppDelegate: WelcomeViewControllerDelegate{
+    func welcomeViewControllerForDimissButtonClick(controller: WelcomeViewController) {
+        guard let navigator = self.navigator else {return}
+        let viewmodel = LoginViewModel(provider: provider, navigator: navigator)
+        let loginVc = LoginViewController(viewModel: viewmodel)
+        let nav = NavigationController(rootViewController: loginVc)
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
+    }
+}
+
 extension AppDelegate {
     private func createRootViewController(navigator: NavigatorType) -> UIViewController {
         if Share.shared.isLogin {
             let tabbar = TabBarController.create(networkProvider: provider, navigator: navigator)
             return tabbar
         } else {
-            let viewmodel = LoginViewModel(provider: provider, navigator: navigator)
-            let loginVc = LoginViewController(viewModel: viewmodel)
-            let nav = NavigationController(rootViewController: loginVc)
-            return nav
+            let welcomeVc = WelcomeViewController()
+            welcomeVc.delegate = self
+            return welcomeVc
         }
     }
 

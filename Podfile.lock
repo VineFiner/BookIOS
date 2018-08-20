@@ -1,7 +1,9 @@
 PODS:
+  - ActiveLabel (0.9.0)
   - Alamofire (4.7.2)
   - BarcodeScanner (4.1.3)
   - BHBPopView (1.2.0)
+  - CryptoSwift (0.11.0)
   - CYLTabBarController (1.17.16)
   - DynamicColor (4.0.2)
   - EmptyKit (4.0.1)
@@ -21,6 +23,7 @@ PODS:
   - "NSObject+Rx (4.3.0)":
     - RxSwift (~> 4.0)
   - Pageboy (2.5.4)
+  - PKHUD (5.1.0)
   - Result (3.2.4)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
@@ -28,13 +31,16 @@ PODS:
   - SKPhotoBrowser (5.0.9)
   - SnapKit (4.0.0)
   - SwiftyBeaver (1.5.2)
+  - TextFieldEffects (1.4.0)
   - TKSubmitTransition (2.0)
   - URLNavigator (2.0.6)
 
 DEPENDENCIES:
+  - ActiveLabel (~> 0.9.0)
   - Alamofire (~> 4.7.2)
   - BarcodeScanner (~> 4.1.3)
   - BHBPopView (~> 1.2.0)
+  - CryptoSwift (~> 0.11.0)
   - CYLTabBarController (~> 1.17.16)
   - DynamicColor (~> 4.0.2)
   - EmptyKit (~> 4.0.1)
@@ -47,19 +53,23 @@ DEPENDENCIES:
   - Moya/RxSwift (~> 11.0.2)
   - "NSObject+Rx (~> 4.3.0)"
   - Pageboy (~> 2.5.2)
+  - PKHUD (~> 5.1.0)
   - RxCocoa (~> 4.2.0)
   - RxSwift (~> 4.2.0)
   - SKPhotoBrowser (~> 5.0.8)
   - SnapKit (~> 4.0.0)
   - SwiftyBeaver (~> 1.5.2)
+  - TextFieldEffects (~> 1.4.0)
   - TKSubmitTransition (from `https://github.com/entotsu/TKSubmitTransition.git`, tag `swift4`)
   - URLNavigator (~> 2.0.6)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ActiveLabel
     - Alamofire
     - BarcodeScanner
     - BHBPopView
+    - CryptoSwift
     - CYLTabBarController
     - DynamicColor
     - EmptyKit
@@ -71,12 +81,14 @@ SPEC REPOS:
     - Moya
     - "NSObject+Rx"
     - Pageboy
+    - PKHUD
     - Result
     - RxCocoa
     - RxSwift
     - SKPhotoBrowser
     - SnapKit
     - SwiftyBeaver
+    - TextFieldEffects
     - URLNavigator
 
 EXTERNAL SOURCES:
@@ -90,9 +102,11 @@ CHECKOUT OPTIONS:
     :tag: swift4
 
 SPEC CHECKSUMS:
+  ActiveLabel: c4fdd14a288483e98b5a3dff0ab214699aeee74a
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   BarcodeScanner: fce1ad2b3f28286b1ab5091fe0979789618bee27
   BHBPopView: ea1c5a614e6bbbbc64c873d52fb1b5b60378cef0
+  CryptoSwift: ad5208dd2aae0a764ea4ce2c2d34bd067cae67f0
   CYLTabBarController: fb72c648645336953d522407892c4f61b7b3f898
   DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
   EmptyKit: edb93c20499f8d64615a71afdc7d71e3b020a0c3
@@ -104,15 +118,17 @@ SPEC CHECKSUMS:
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   "NSObject+Rx": 9a5eeff5e08156f849fa973514456f28eef08742
   Pageboy: 46d743783414a18f8b27a988485e0ed2ea219ff7
+  PKHUD: 62ea46a1e88c4def1da784878d199bb54c841e3c
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SKPhotoBrowser: 668c29bdd9d4d276026fc131c55e96d902c2463c
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyBeaver: 85daaaa2b3ae6e31b7b55c99430e8b91dac088af
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TKSubmitTransition: 647b907508da58ba864141e3c4382442ec536d40
   URLNavigator: 2357a32f3b3787b748bf87deb927761f8b0f7f53
 
-PODFILE CHECKSUM: 9a06eec8ea6f688f12f2a5423a15e4779d7b0f0a
+PODFILE CHECKSUM: 41241fb6aee7ee928989b33d886e81db19d860a8
 
 COCOAPODS: 1.5.3
