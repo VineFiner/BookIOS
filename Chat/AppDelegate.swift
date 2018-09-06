@@ -14,7 +14,7 @@ import IQKeyboardManagerSwift
 let log = SwiftyBeaver.self
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GDT {
 
     var window: UIWindow?
     let provider = NetworkManager() // 服务给 viewmodel

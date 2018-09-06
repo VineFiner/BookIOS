@@ -27,6 +27,7 @@ target 'Chat' do
   pod 'CYLTabBarController', '~> 1.17.16' #oc
   pod 'BHBPopView', '~> 1.2.0' #oc
 
+  pod 'ZLPhotoBrowser', '~> 2.7.3'
 
   pod 'URLNavigator', '~> 2.0.6'
 
