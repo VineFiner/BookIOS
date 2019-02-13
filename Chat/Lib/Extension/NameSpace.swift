@@ -38,3 +38,11 @@ extension NamespaceWrapable {
         return NamespaceWrapper.self
     }
 }
+extension NamespaceWrapable {
+    var bf: NamespaceWrapper<Self> {
+        return NamespaceWrapper(val: self)
+    }
+    static var bf: NamespaceWrapper<Self>.Type {
+        return NamespaceWrapper.self
+    }
+}

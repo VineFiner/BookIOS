@@ -103,7 +103,7 @@ class FillInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Other.title
-        self.view.backgroundColor = gViewControllerBgColor
+        self.view.backgroundColor = .white
         setup()
     }
 
@@ -146,32 +146,32 @@ class FillInfoViewController: UIViewController {
     @objc func actionForNext(sender: UIButton) {
         nextButton.startLoadingAnimation()
         guard let imageData = self.imageData else {
-            self.showText("请上传您的靓照")
+            self.ext.showText("请上传您的靓照")
             nextButton.returnToOriginalState()
             return
         }
-        ThirdApi.qnUpload(token: token, data: imageData) { [weak self](key, info) in
-            guard let strongSelf = self else {return}
-            strongSelf.updateInfo(url: Config.shared.qnImageHost + key)
-        }
+//        ThirdApi.qnUpload(token: token, data: imageData) { [weak self](key, info) in
+//            guard let strongSelf = self else {return}
+//            strongSelf.updateInfo(url: Config.shared.qnImageHost + key)
+//        }
     }
 
     func updateInfo(url: String) {
-        let request = UpdateUserRequest(userId: user.identifier, token: token, name: self.nameTextField.text, avator: url, info: self.infoTextField.text, password: nil)
-        Api.send(request, handler: { [weak self](response) in
-            guard let strongSelf = self, let res = response else { return }
-            if res.isOk {
-                // 跳转到首页
-                strongSelf.nextButton.startFinishAnimation(1, completion: {
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                        appDelegate.switchToAppIndexUI()
-                    }
-                })
-            } else {
-                strongSelf.nextButton.returnToOriginalState()
-                strongSelf.showText(res.message)
-            }
-        })
+//        let request = UpdateUserRequest(userId: user.identifier, token: token, name: self.nameTextField.text, avator: url, info: self.infoTextField.text, password: nil)
+//        Api.send(request, handler: { [weak self](response) in
+//            guard let strongSelf = self, let res = response else { return }
+//            if res.isOk {
+//                // 跳转到首页
+//                strongSelf.nextButton.startFinishAnimation(1, completion: {
+//                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//                        appDelegate.switchToAppIndexUI()
+//                    }
+//                })
+//            } else {
+//                strongSelf.nextButton.returnToOriginalState()
+//                strongSelf.showText(res.message)
+//            }
+//        })
     }
 
 }
